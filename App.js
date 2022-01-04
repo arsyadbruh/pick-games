@@ -15,7 +15,20 @@ const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
   return (
     <Tab.Navigator 
-      screenOptions={() => ({
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size }) => {
+          let iconName;
+          if ( route.name === "Home") {
+            iconName = focused ? "home-sharp" : "home-outline"
+          } else if (route.name === "Search") {
+            iconName = focused ? "search-sharp" : "search-outline"
+          } else if (route.name === "About") {
+            iconName = focused ? "information-circle-sharp" : "information-circle-outline"
+          }
+          return (
+            <Ionicons name={iconName} size={size} color={color} />
+          );
+        },
         tabBarActiveTintColor: "white",
         tabBarInactiveTintColor: "black",
         tabBarIconStyle: { marginTop: 10 },
@@ -35,11 +48,6 @@ const BottomNavigator = () => {
         component={HomeScreen}
         options={{
           tabBarLabel: "Home",
-          tabBarIcon: ({ color, size }) => {
-            return (
-              <Ionicons name="home-outline" size={size} color={color} />
-            );
-          },
         }}
       />
 
@@ -48,11 +56,6 @@ const BottomNavigator = () => {
         component={SearchScreen}
         options={{
           tabBarLabel: "Search",
-          tabBarIcon: ({ color, size }) => {
-            return (
-              <Ionicons name="search-outline" size={size} color={color} />
-            );
-          },
         }}
       />
 
@@ -61,15 +64,6 @@ const BottomNavigator = () => {
         component={AboutScreen}
         options={{
           tabBarLabel: "About",
-          tabBarIcon: ({ color, size }) => {
-            return (
-              <Ionicons
-                name="ios-information-circle-outline"
-                size={size}
-                color={color}
-              />
-            );
-          },
         }}
       />
     </Tab.Navigator>
@@ -80,8 +74,9 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen  name="BottomNavigator" component={BottomNavigator} />
+        <StatusBar backgroundColor="#44475c" />
+        <Stack.Navigator screenOptions={{ headerShown: "false" }}>
+          <Stack.Screen  name="BottomNavigator" component={BottomNavigator} options={{ headerShown: false }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
