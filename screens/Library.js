@@ -3,15 +3,15 @@ import {Box, Center, Text} from 'native-base';
 import Header from '../components/Header';
 
 
-const SearchScreen = () => {
+const LibraryScreen = () => {
     return (
         <>
-            <Header title={"Search"}/>
+            <Header title={"Library"}/>
             <Center flex={1}>
-                <Text>Search Screen</Text>
+                <Text>Library Screen</Text>
             </Center>
         </>
     )
 }
 
-export default SearchScreen;
+export default LibraryScreen;

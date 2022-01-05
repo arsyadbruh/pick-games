@@ -1,6 +1,6 @@
 import HomeScreen from "./Home";
-import SearchScreen from "./Search";
+import LibraryScreen from "./Library";
 import AboutScreen from "./About";
 import GameDetailScreen from "./GameDetail";
 
-export {HomeScreen, SearchScreen, AboutScreen, GameDetailScreen};
+export {HomeScreen, LibraryScreen, AboutScreen, GameDetailScreen};

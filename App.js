@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { HomeScreen, SearchScreen, AboutScreen, GameDetailScreen } from "./screens";
+import { HomeScreen, LibraryScreen, AboutScreen, GameDetailScreen } from "./screens";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +34,7 @@ const BottomNavigator = () => {
         tabBarStyle: {
           backgroundColor: "#272b30",
           height: 70,
+          borderTopWidth: 0,
         },
         headerShown: false,
       })}>
@@ -47,7 +48,7 @@ const BottomNavigator = () => {
 
       <Tab.Screen
         name="Library"
-        component={SearchScreen}
+        component={LibraryScreen}
         options={{
           tabBarLabel: "Library",
         }}
