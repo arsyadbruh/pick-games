@@ -15,7 +15,7 @@ import {
     const navigation = useNavigation();
   
     return (
-      <Box bg="#44475c" paddingX={15} paddingY={2}>
+      <Box bg="#272b30" paddingX={15} paddingY={2}>
         <HStack alignItems="center">
             {withBackBtn && (
               <Pressable onPress={() => navigation.goBack()}>

@@ -10,7 +10,6 @@ import { HomeScreen, SearchScreen, AboutScreen } from './screens';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// primary color : #44475c
 
 const BottomNavigator = () => {
   return (
@@ -30,14 +29,14 @@ const BottomNavigator = () => {
           );
         },
         tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "black",
+        tabBarInactiveTintColor: "#7f8b9b",
         tabBarIconStyle: { marginTop: 10 },
         tabBarLabelStyle: {
           fontSize: 12,
           marginBottom: 10
         },
         tabBarStyle: {
-          backgroundColor: "#44475c",
+          backgroundColor: "#272b30",
           height: 70,
         },
         headerShown: false,
@@ -74,7 +73,7 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <StatusBar backgroundColor="#44475c" />
+        <StatusBar backgroundColor="#272b30" />
         <Stack.Navigator screenOptions={{ headerShown: "false" }}>
           <Stack.Screen  name="BottomNavigator" component={BottomNavigator} options={{ headerShown: false }}/>
         </Stack.Navigator>
