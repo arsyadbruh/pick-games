@@ -1,47 +1,42 @@
-import React from 'react';
-import { NativeBaseProvider, StatusBar, } from 'native-base';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from "react";
+import { NativeBaseProvider, StatusBar } from "native-base";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { HomeScreen, SearchScreen, AboutScreen, GameDetailScreen } from './screens';
-
+import { HomeScreen, SearchScreen, AboutScreen, GameDetailScreen } from "./screens";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-
 const BottomNavigator = () => {
   return (
-    <Tab.Navigator 
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size }) => {
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          if ( route.name === "Home") {
-            iconName = focused ? "home-sharp" : "home-outline"
+          if (route.name === "Home") {
+            iconName = focused ? "home-sharp" : "home-outline";
           } else if (route.name === "Search") {
-            iconName = focused ? "search-sharp" : "search-outline"
+            iconName = focused ? "search-sharp" : "search-outline";
           } else if (route.name === "About") {
-            iconName = focused ? "information-circle-sharp" : "information-circle-outline"
+            iconName = focused ? "information-circle-sharp" : "information-circle-outline";
           }
-          return (
-            <Ionicons name={iconName} size={size} color={color} />
-          );
+          return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: "white",
         tabBarInactiveTintColor: "#7f8b9b",
         tabBarIconStyle: { marginTop: 10 },
         tabBarLabelStyle: {
           fontSize: 12,
-          marginBottom: 10
+          marginBottom: 10,
         },
         tabBarStyle: {
           backgroundColor: "#272b30",
           height: 70,
         },
         headerShown: false,
-      })}
-    >
+      })}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -66,8 +61,8 @@ const BottomNavigator = () => {
         }}
       />
     </Tab.Navigator>
-  )
-}
+  );
+};
 
 export default function App() {
   return (
@@ -75,11 +70,18 @@ export default function App() {
       <NavigationContainer>
         <StatusBar backgroundColor="#272b30" />
         <Stack.Navigator screenOptions={{ headerShown: "false" }}>
-          <Stack.Screen name="BottomNavigator" component={BottomNavigator} options={{ headerShown: false }}/>
-          <Stack.Screen name="GameDetailScreen" component={GameDetailScreen} options={{ headerShown: false }}/>
+          <Stack.Screen
+            name="BottomNavigator"
+            component={BottomNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="GameDetailScreen"
+            component={GameDetailScreen}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
   );
 }
-
