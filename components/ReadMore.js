@@ -5,8 +5,8 @@ import { TouchableOpacity } from "react-native";
 const ReadMore = ({text}) => {
     const [readMore, setReadMore] = useState(true);
     return (
-        <View px={3}>
-            <Text color={"white"} textAlign={"justify"}>
+        <View pr={3}>
+            <Text color={"white"} textAlign={"justify"} fontSize={"16px"}>
                 {readMore ? text.slice(0,250) : text}
             </Text>
             <TouchableOpacity onPress={() => setReadMore(!readMore)} >

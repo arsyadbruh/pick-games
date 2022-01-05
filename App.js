@@ -17,8 +17,8 @@ const BottomNavigator = () => {
           let iconName;
           if (route.name === "Home") {
             iconName = focused ? "home-sharp" : "home-outline";
-          } else if (route.name === "Search") {
-            iconName = focused ? "search-sharp" : "search-outline";
+          } else if (route.name === "Library") {
+            iconName = focused ? "ios-library-sharp" : "ios-library-outline";
           } else if (route.name === "About") {
             iconName = focused ? "information-circle-sharp" : "information-circle-outline";
           }
@@ -46,10 +46,10 @@ const BottomNavigator = () => {
       />
 
       <Tab.Screen
-        name="Search"
+        name="Library"
         component={SearchScreen}
         options={{
-          tabBarLabel: "Search",
+          tabBarLabel: "Library",
         }}
       />
 
