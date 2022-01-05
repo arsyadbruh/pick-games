@@ -10,27 +10,25 @@ import {
   View,
   Heading,
   HStack,
+  ScrollView,
 } from "native-base";
 import Header from "../components/Header";
 import { TouchableOpacity } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
-  const [isFetching, setFetching] = useState(false);
   const [games, setGames] = useState([]);
-  const [sortBy, setSortBy] = useState("release-date");
 
-  const fetchListGame = async (sorting = "release-date") => {
-    let urlApi = `https://www.freetogame.com/api/games?sort-by=${sorting}`;
+  const fetchListGame = async () => {
+    let urlApi = `https://www.freetogame.com/api/games?sort-by=popularity`;
     try {
       const response = await fetch(urlApi);
       const listGame = await response.json();
-      setGames(listGame);
+      setGames(listGame.slice(0,10));
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
-      setFetching(false);
     }
   };
 
@@ -85,22 +83,6 @@ const HomeScreen = ({ navigation }) => {
     );
   };
 
-  const handleSort = (sorting) => {
-    if (sorting === "release-date") {
-      setSortBy("release-date");
-    } else if (sorting === "popularity") {
-      setSortBy("popularity");
-    } else if (sorting === "alphabetical") {
-      setSortBy("alphabetical");
-    }
-    setLoading(true);
-    fetchListGame(sorting);
-  };
-
-  //   const refreshList = () => {
-  //       setFetching(true);
-  //       fetchListGame();
-  //   }
 
   useEffect(() => {
     fetchListGame();
@@ -109,56 +91,20 @@ const HomeScreen = ({ navigation }) => {
   return (
     <>
       {console.log("==================== render again ====================")}
-      <Header title={"Home"} />
-      <Box bg={"#2a2e33"} p={5}>
-        <HStack space={5}>
-          <Text color={"white"} fontWeight={"bold"} fontSize={"16px"}>
-            Sort By
-          </Text>
-          <TouchableOpacity onPress={() => handleSort("release-date")}>
-            <Text
-              bg={sortBy === "release-date" ? "white" : "#2a2e33"}
-              color={sortBy === "release-date" ? "#2a2e33" : "white"}
-              fontSize={"16px"}
-              px={3}
-              borderRadius={"md"}>
-              Date
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleSort("popularity")}>
-            <Text
-              bg={sortBy === "popularity" ? "white" : "#2a2e33"}
-              color={sortBy === "popularity" ? "#2a2e33" : "white"}
-              fontSize={"16px"}
-              px={3}
-              borderRadius={"md"}>
-              Popularity
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleSort("alphabetical")}>
-            <Text
-              bg={sortBy === "alphabetical" ? "white" : "#2a2e33"}
-              color={sortBy === "alphabetical" ? "#2a2e33" : "white"}
-              fontSize={"16px"}
-              px={3}
-              borderRadius={"md"}>
-              A - Z
-            </Text>
-          </TouchableOpacity>
-        </HStack>
-      </Box>
-      {isLoading ? (
-        <Center flex={1} bg={"#2a2e33"}>
-          <Spinner size={"lg"} color={"#fe7100"} />
-        </Center>
-      ) : (
-        <FlatList
-          data={games}
-          keyExtractor={(item) => item.id}
-          renderItem={renderListGame}
-          bg={"#2a2e33"}
-        />
-      )}
+      <Header title={"Home"} />  
+        {/* <Heading size={"2xl"} bg={"#2a2e33"} color={"white"}>Top 10 Popular Games</Heading> */}
+        {isLoading ? (
+            <Center flex={1} bg={"#2a2e33"}>
+            <Spinner size={"lg"} color={"#fe7100"} />
+            </Center>
+        ) : (
+            <FlatList
+            data={games}
+            keyExtractor={(item) => item.id}
+            renderItem={renderListGame}
+            bg={"#2a2e33"}
+            />
+        )}
     </>
   );
 };
