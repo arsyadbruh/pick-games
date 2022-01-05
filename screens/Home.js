@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Box, Center, Text, Image, Spinner, FlatList, AspectRatio, View, Heading} from 'native-base';
+import {Box, Center, Text, Image, Spinner, FlatList, AspectRatio, View, Heading, HStack} from 'native-base';
 import Header from '../components/Header';
 import { TouchableOpacity } from 'react-native';
 
@@ -30,7 +30,12 @@ const HomeScreen = () => {
                             <Image source={{ uri: game.thumbnail }} alt="Article Thumnail" borderTopRadius={"sm"}/>
                         </AspectRatio>
                         <Box bg={"#32383e"} py={3} px={5} borderBottomRadius={"sm"}>
-                            <Heading color={"white"}>{game.title}</Heading>
+                            <Heading  color={"white"}>{game.title}</Heading>
+                            <Text color={"white"} textAlign={"justify"}>{game.short_description}</Text>
+                            <HStack mt={2}>
+                                <Text bg={"#7a8288"} color={"#4e5459"} fontWeight={"bold"} p={1} borderRadius={"lg"} mr={2}>{game.genre}</Text>
+                                <Text bg={"#7a8288"} color={"#4e5459"} fontWeight={"bold"} p={1} borderRadius={"lg"}>{game.platform}</Text>
+                            </HStack>
                         </Box>
                     </Box>
                 </TouchableOpacity>
