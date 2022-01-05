@@ -8,7 +8,7 @@ const AboutScreen = () => {
         <>
             <Header title={"About"}/>
             <Center flex={1}>
-                <Text>About Screen</Text>
+                <Text>Oleh Kelompok 2</Text>
             </Center>
         </>
     )
