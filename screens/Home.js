@@ -3,7 +3,7 @@ import {Box, Center, Text, Image, Spinner, FlatList, AspectRatio, View, Heading,
 import Header from '../components/Header';
 import { TouchableOpacity } from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const [games, setGames] = useState([]);
 
@@ -24,13 +24,15 @@ const HomeScreen = () => {
         const game = item.item;
         return (
             <View p={5}>
-                <TouchableOpacity onPress={ () => console.log("clicked")} >
+                <TouchableOpacity onPress={ () => navigation.navigate("GameDetailScreen", {
+                    gameID : game.id,
+                })} >
                     <Box>
                         <AspectRatio w={"100%"} ratio={16/10}>
                             <Image source={{ uri: game.thumbnail }} alt="Article Thumnail" borderTopRadius={"sm"}/>
                         </AspectRatio>
                         <Box bg={"#32383e"} py={3} px={5} borderBottomRadius={"sm"}>
-                            <Heading  color={"white"}>{game.title}</Heading>
+                            <Heading size={"xl"} color={"white"}>{game.title}</Heading>
                             <Text color={"white"} textAlign={"justify"}>{game.short_description}</Text>
                             <HStack mt={2}>
                                 <Text bg={"#7a8288"} color={"#4e5459"} fontWeight={"bold"} p={1} borderRadius={"lg"} mr={2}>{game.genre}</Text>
