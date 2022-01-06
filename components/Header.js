@@ -2,14 +2,11 @@ import {
     ArrowBackIcon,
     Box,
     HStack,
-    Image,
     Pressable,
-    SearchIcon,
     Text,
   } from "native-base";
   import React from "react";
   import { useNavigation } from "@react-navigation/core";
-  import {TouchableOpacity} from "react-native";
   
   const Header = ({ title, withBackBtn }) => {
     const navigation = useNavigation();

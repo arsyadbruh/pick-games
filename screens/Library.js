@@ -5,7 +5,6 @@ import {
   Center,
   Text,
   Button,
-  ScrollView,
   Flex,
   Modal,
   Spinner,
@@ -78,9 +77,9 @@ const LibraryScreen = ({ navigation }) => {
   const [groupValues, setGroupValues] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  // Fetch seluruh game dengan sorting dan filter hanya platform
   const fetchListGameNoFilter = async (sorting = "release-date", platformGames = "pc") => {
     let urlApi = `https://www.freetogame.com/api/games?sort-by=${sorting}&platform=${platformGames}`;
-    console.log(urlApi);
     try {
       const response = await fetch(urlApi);
       const listGame = await response.json();
@@ -92,10 +91,10 @@ const LibraryScreen = ({ navigation }) => {
     }
   };
 
+  // Fetch game dengan adanya multiple filter berdasarkan tags
   const fetchListGameFilter = async (sorting = "release-date", platformGames = "pc") => {
-    let urlApi = `https://www.freetogame.com/api/filter?tag=${groupValues.join(".")}&platform=${platformGames}&sort-by=${sorting}`;
-    console.log(urlApi);
-
+    const tags = groupValues.join(".");
+    let urlApi = `https://www.freetogame.com/api/filter?tag=${tags}&platform=${platformGames}&sort-by=${sorting}`;
     try {
       const response = await fetch(urlApi);
       const listGame = await response.json();
@@ -143,6 +142,7 @@ const LibraryScreen = ({ navigation }) => {
     );
   };
 
+  // hanle event untuk sorting list game
   const handleSort = (sorting) => {
     if (sorting === "release-date") {
       setSortBy("release-date");
@@ -152,9 +152,11 @@ const LibraryScreen = ({ navigation }) => {
       setSortBy("alphabetical");
     }
     setLoading(true);
+    // cek apakah ada tags yang tercentang
     groupValues.length === 0 ? fetchListGameNoFilter(sorting, platform) : fetchListGameFilter(sorting, platform);
   };
 
+  // handle event untuk filter platform
   const handlePlatform = (platformGames) => {
     platformGames === "pc" ? setPlatform("pc") : setPlatform("browser");
 
@@ -162,6 +164,7 @@ const LibraryScreen = ({ navigation }) => {
     groupValues.length === 0 ? fetchListGameNoFilter(sortBy, platformGames) : fetchListGameFilter(sortBy, platformGames);
   };
 
+  // handle event untuk filter by tags
   const handleFilter = () => {
     setLoading(true);
     fetchListGameFilter(sortBy, platform);
@@ -244,6 +247,7 @@ const LibraryScreen = ({ navigation }) => {
         </HStack>
       </Box>
 
+      {/* Filter button section */}
       <Box bg={"#2a2e33"} px={3} pb={5} pt={3}>
         <Button onPress={() => setShowModal(true)} size={"sm"}  leftIcon={<Icon as={AntDesign} name="filter" size="sm" />}>
             <Text color={"white"}>Category ( {groupValues.length} )</Text>

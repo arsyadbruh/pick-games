@@ -10,11 +10,9 @@ import {
   Image,
   Spinner,
   HStack,
-  Divider,
   VStack,
 } from "native-base";
 import ReadMore from "../components/ReadMore";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 
 const GameDetailScreen = ({ route }) => {
@@ -42,6 +40,8 @@ const GameDetailScreen = ({ route }) => {
   return (
     <>
       <Header title={"Game Detail"} withBackBtn={true} />
+
+
       {isLoading ? (
         <Center flex={1} bg={"#272b30"}>
           <Spinner size={"lg"} color={"#fe7100"} />
@@ -71,6 +71,11 @@ const GameDetailScreen = ({ route }) => {
               </ScrollView>
             </Box>
             
+            {/* Minimum requirements section
+             * karena beberapa game terutama platform browser tidak ada 
+             * system requirements maka di gunakan hasOwnProperty() untuk
+             * cek apakah game ada property minimum_system_requirements
+             */}
             {
                 detailGame.hasOwnProperty("minimum_system_requirements") ?
                 (
@@ -108,11 +113,12 @@ const GameDetailScreen = ({ route }) => {
                     </Text>
                     </Box>
                 ) : (
+                  // jika tidak ada menampilkan <Box> kosong
                     <Box></Box>
                 )
             }
 
-            {/*  */}
+            {/* About Game section mengambil component ReadMore untuk menyingkat description */}
             <Box my={3} ml={3}>
                 <Heading color="white" mb={3}>About {detailGame.title}</Heading>
                 <ReadMore text={detailGame.description} />

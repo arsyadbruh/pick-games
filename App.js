@@ -71,16 +71,8 @@ export default function App() {
       <NavigationContainer>
         <StatusBar backgroundColor="#272b30" />
         <Stack.Navigator screenOptions={{ headerShown: "false" }}>
-          <Stack.Screen
-            name="BottomNavigator"
-            component={BottomNavigator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="GameDetailScreen"
-            component={GameDetailScreen}
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name="BottomNavigator" component={BottomNavigator} options={{ headerShown: false }} />
+          <Stack.Screen name="GameDetailScreen" component={GameDetailScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
