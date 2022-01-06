@@ -24,4 +24,4 @@ untuk menginstall silahkan clone atau download repository ini dan jalankan comma
 npm install
 ```
 
-atau install aplikasi Expo Go di smartphone dan scan dari link berikut. [Pick Games in Expo](https://expo.dev/accounts/jafrick/projects/pick-games).
+atau install aplikasi Expo Go di smartphone dan scan dari link berikut. [Pick Games in Expo](https://expo.dev/@jafrick/pick-games).
