@@ -303,7 +303,7 @@ const LibraryScreen = ({ navigation }) => {
           <Spinner size={"lg"} color={"#fe7100"} />
         </Center>
       ) : (
-        <FlatList data={games} keyExtractor={(item) => item.id} renderItem={renderListGame} bg={"#2a2e33"} />
+        <FlatList data={games} keyExtractor={(item) => item.id} renderItem={renderListGame} bg={"#2a2e33"} key={games.id}/>
       )}
     </>
   );
