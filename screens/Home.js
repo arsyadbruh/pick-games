@@ -67,7 +67,7 @@ const HomeScreen = ({ navigation }) => {
 
       {isLoading ? (
         <Center flex={1} bg={"#2a2e33"}>
-          <Spinner size={"lg"} color={"#fe7100"} />
+          <Spinner size={"lg"} colorScheme={"primary"} />
         </Center>
       ) : (
         <FlatList data={games} keyExtractor={(item) => item.id} renderItem={renderListGame} bg={"#2a2e33"} />

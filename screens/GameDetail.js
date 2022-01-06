@@ -44,7 +44,7 @@ const GameDetailScreen = ({ route }) => {
 
       {isLoading ? (
         <Center flex={1} bg={"#272b30"}>
-          <Spinner size={"lg"} color={"#fe7100"} />
+          <Spinner size={"lg"} colorScheme={"primary"} />
         </Center>
       ) : (
         <ScrollView bg={"#272b30"}>
