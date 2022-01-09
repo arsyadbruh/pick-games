@@ -18,8 +18,7 @@ import {
 } from "native-base";
 import Header from "../components/Header";
 import { TouchableOpacity } from "react-native";
-import { AntDesign } from '@expo/vector-icons';
-
+import { AntDesign } from "@expo/vector-icons";
 
 const LibraryScreen = ({ navigation }) => {
   const category = [
@@ -95,7 +94,6 @@ const LibraryScreen = ({ navigation }) => {
   const fetchListGameFilter = async (sorting = "release-date", platformGames = "pc") => {
     const tags = groupValues.join(".");
     let urlApi = `https://www.freetogame.com/api/filter?tag=${tags}&platform=${platformGames}&sort-by=${sorting}`;
-    console.log("API URL : "+urlApi)
     try {
       const response = await fetch(urlApi);
       const listGame = await response.json();
@@ -162,7 +160,9 @@ const LibraryScreen = ({ navigation }) => {
     platformGames === "pc" ? setPlatform("pc") : setPlatform("browser");
 
     setLoading(true);
-    groupValues.length === 0 ? fetchListGameNoFilter(sortBy, platformGames) : fetchListGameFilter(sortBy, platformGames);
+    groupValues.length === 0
+      ? fetchListGameNoFilter(sortBy, platformGames)
+      : fetchListGameFilter(sortBy, platformGames);
   };
 
   // handle event untuk filter by tags
@@ -250,13 +250,18 @@ const LibraryScreen = ({ navigation }) => {
 
       {/* Filter button section */}
       <Box bg={"#2a2e33"} px={3} pb={5} pt={3}>
-        <Button onPress={() => setShowModal(true)} size={"sm"}  leftIcon={<Icon as={AntDesign} name="filter" size="sm" />}>
-            <Text color={"white"}>Category ( {groupValues.length} )</Text>
+        <Button
+          onPress={() => setShowModal(true)}
+          size={"sm"}
+          leftIcon={<Icon as={AntDesign} name="filter" size="sm" />}>
+          <Text color={"white"}>Category ( {groupValues.length} )</Text>
         </Button>
         <Modal isOpen={showModal} onClose={() => handleFilter()}>
           <Modal.Content maxWidth="400px">
-            <Modal.CloseButton/>
-            <Modal.Header><Heading>Category</Heading></Modal.Header>
+            <Modal.CloseButton />
+            <Modal.Header>
+              <Heading>Category</Heading>
+            </Modal.Header>
             <Modal.Body>
               <Checkbox.Group onChange={setGroupValues} value={groupValues} accessibilityLabel="choose Category">
                 <Flex flexDirection={"row"} flexWrap={"wrap"}>
@@ -291,21 +296,24 @@ const LibraryScreen = ({ navigation }) => {
         </Modal>
       </Box>
 
-
       {isLoading ? (
         <Center flex={1} bg={"#2a2e33"}>
           <Spinner size={"lg"} colorScheme={"primary"} />
         </Center>
+      ) : games.status != undefined ? (
+        <Center flex={1} bg={"#2a2e33"}>
+          <Text color={"white"}>No game in list</Text>
+        </Center>
       ) : (
-        games.status != undefined ? (
-          <Center flex={1} bg={"#2a2e33"}>
-            <Text color={"white"}>No game in list</Text>
-          </Center>
-        ) : (
-          <FlatList data={games} keyExtractor={(item) => item.id.toString()} renderItem={renderListGame} bg={"#2a2e33"} key={games.forEach(item => {
-            item.id
-          })}/>
-        )
+        <FlatList
+          data={games}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderListGame}
+          bg={"#2a2e33"}
+          key={games.forEach((item) => {
+            item.id;
+          })}
+        />
       )}
     </>
   );
