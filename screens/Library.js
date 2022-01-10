@@ -21,6 +21,9 @@ import { TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 const LibraryScreen = ({ navigation }) => {
+  // daftar category dari free to play games
+  // karena tidak ada endpoint API untuk list category
+  // jadi disini pakai array terus di looping aja pakai map()
   const category = [
     "mmorpg",
     "shooter",
@@ -69,12 +72,12 @@ const LibraryScreen = ({ navigation }) => {
     "mmorts",
   ];
 
-  const [isLoading, setLoading] = useState(true);
-  const [games, setGames] = useState([]);
+  const [isLoading, setLoading] = useState(true); // buat spinner
+  const [games, setGames] = useState([]); // nampung daftar games
   const [sortBy, setSortBy] = useState("release-date");
   const [platform, setPlatform] = useState("pc");
-  const [groupValues, setGroupValues] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [groupValues, setGroupValues] = useState([]); // nampung filter by category
+  const [showModal, setShowModal] = useState(false); // kondisi buat pop-up pilihan categorynya
 
   // Fetch seluruh game dengan sorting dan filter hanya platform
   const fetchListGameNoFilter = async (sorting = "release-date", platformGames = "pc") => {
@@ -105,6 +108,7 @@ const LibraryScreen = ({ navigation }) => {
     }
   };
 
+  // component buat di render pakai flatlist
   const renderListGame = (item) => {
     const game = item.item;
     return (
@@ -141,8 +145,9 @@ const LibraryScreen = ({ navigation }) => {
     );
   };
 
-  // hanle event untuk sorting list game
+  // function buat handle event untuk sorting list game
   const handleSort = (sorting) => {
+    //set sorting ke pilihan user
     if (sorting === "release-date") {
       setSortBy("release-date");
     } else if (sorting === "popularity") {
@@ -150,16 +155,17 @@ const LibraryScreen = ({ navigation }) => {
     } else if (sorting === "alphabetical") {
       setSortBy("alphabetical");
     }
-    setLoading(true);
+    setLoading(true); // aktifkan spinner
     // cek apakah ada tags yang tercentang
     groupValues.length === 0 ? fetchListGameNoFilter(sorting, platform) : fetchListGameFilter(sorting, platform);
   };
 
   // handle event untuk filter platform
   const handlePlatform = (platformGames) => {
-    platformGames === "pc" ? setPlatform("pc") : setPlatform("browser");
+    platformGames === "pc" ? setPlatform("pc") : setPlatform("browser"); // set platform ke pilihan user
 
-    setLoading(true);
+    setLoading(true); // aktifkan spinner
+
     groupValues.length === 0
       ? fetchListGameNoFilter(sortBy, platformGames)
       : fetchListGameFilter(sortBy, platformGames);
@@ -172,6 +178,8 @@ const LibraryScreen = ({ navigation }) => {
     setShowModal(false);
   };
 
+
+  // didMount atau buat running fetch saat screen di panggil
   useEffect(() => {
     fetchListGameNoFilter();
   }, []);

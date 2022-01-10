@@ -40,10 +40,12 @@ const GameDetailScreen = ({ route }) => {
     fetchDetailGame();
   }, []);
 
+  // buat open link di browser
   const handleOpenLink = (link) => {
     Linking.openURL(link);
   };
 
+  // function untuk tombol share
   const onShare = async (message) => {
     try {
       await Share.share({
@@ -66,6 +68,7 @@ const GameDetailScreen = ({ route }) => {
       ) : (
         <ScrollView bg={"#272b30"}>
           <Box mb={10}>
+            {/* Judul dan Gambar */}
             <Box>
               <Heading color={"white"} size={"2xl"} my={3} ml={3}>
                 {detailGame.title}
@@ -75,6 +78,7 @@ const GameDetailScreen = ({ route }) => {
               <Image source={{ uri: detailGame.thumbnail }} alt="Thumbnail Game" />
             </AspectRatio>
 
+            {/* Button action */}
             <Box my={3} p={3}>
               <HStack justifyContent={"space-between"} space={3} pr={3}>
                 <Button onPress={() => handleOpenLink(detailGame.freetogame_profile_url)} width={"50%"}>
@@ -92,9 +96,10 @@ const GameDetailScreen = ({ route }) => {
               </HStack>
             </Box>
 
+            {/* Screenshot section */}
             <Box py={3}>
               <Heading color={"white"} mb={2} ml={3}>
-                ScreenShoot
+                ScreenShot
               </Heading>
               <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 {detailGame.screenshots.map((item) => (
@@ -151,14 +156,16 @@ const GameDetailScreen = ({ route }) => {
               <Box></Box>
             )}
 
-            {/* About Game section mengambil component ReadMore untuk menyingkat description */}
+            {/* About Game section */}
             <Box my={3} ml={3}>
               <Heading color="white" mb={3}>
                 About {detailGame.title}
               </Heading>
+              {/* mengambil component ReadMore untuk menyingkat description  */}
               <ReadMore text={detailGame.description} />
             </Box>
 
+            {/* Info game */}
             <Box my={3} ml={3}>
               <Heading color={"white"} mb={3}>
                 Additional Information

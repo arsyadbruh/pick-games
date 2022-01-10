@@ -10,7 +10,14 @@ const ReadMore = ({ text }) => {
         {readMore ? text.slice(0, 250) : text}
       </Text>
       <TouchableOpacity onPress={() => setReadMore(!readMore)}>
-        <Text bg={"#4e5459"} color={"white"} fontWeight={"bold"} borderRadius={"lg"} px={3} width={"80px"}>
+        <Text
+          bg={"#4e5459"}
+          color={"white"}
+          fontWeight={"bold"}
+          borderRadius={"lg"}
+          px={3}
+          width={"30%"}
+          textAlign={"center"}>
           {readMore ? "read more" : "show less"}
         </Text>
       </TouchableOpacity>

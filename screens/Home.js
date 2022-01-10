@@ -4,22 +4,24 @@ import Header from "../components/Header";
 import { TouchableOpacity } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
-  const [isLoading, setLoading] = useState(true);
-  const [games, setGames] = useState([]);
+  const [isLoading, setLoading] = useState(true); // buat spinner
+  const [games, setGames] = useState([]); // nampung daftar game
 
   const fetchListGame = async () => {
     let urlApi = `https://www.freetogame.com/api/games?sort-by=popularity`;
     try {
       const response = await fetch(urlApi);
-      const listGame = await response.json();
+      const listGame = await response.json(); // taruh hasil fetch json ke daftar games
       setGames(listGame.slice(0, 10)); // limit 10 game popular
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false);
+      setLoading(false); // matikan spinner
     }
   };
 
+
+  // component buat di render oleh flatlist
   const renderListGame = (item) => {
     const game = item.item;
     return (
