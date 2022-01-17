@@ -37,7 +37,7 @@ const AboutScreen = () => {
                 Version
               </Text>
               <Text color={"white"} fontSize={"18px"}>
-                v0.1.1 - Beta
+                v1.1.2
               </Text>
             </HStack>
             <HStack my={1} justifyContent={"space-between"}>
@@ -45,7 +45,7 @@ const AboutScreen = () => {
                 Update on
               </Text>
               <Text color={"white"} fontSize={"18px"}>
-                Januari, 07 2022
+                Januari, 18 2022
               </Text>
             </HStack>
             <HStack my={1} justifyContent={"space-between"}>

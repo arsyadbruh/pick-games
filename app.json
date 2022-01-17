@@ -4,9 +4,9 @@
     "slug": "pick-games",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo-icon.png",
     "splash": {
-      "image": "./assets/mysplash.png",
+      "image": "./assets/pick-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#2a2e33"
     },
@@ -22,7 +22,7 @@
     "android": {
       "package" : "com.team2.pickgames",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo-adaptive.png",
         "backgroundColor": "#FFFFFF"
       }
     },
