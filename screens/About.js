@@ -37,7 +37,7 @@ const AboutScreen = () => {
                 Version
               </Text>
               <Text color={"white"} fontSize={"18px"}>
-                v1.1.2
+                v1.1.3
               </Text>
             </HStack>
             <HStack my={1} justifyContent={"space-between"}>
@@ -45,7 +45,7 @@ const AboutScreen = () => {
                 Update on
               </Text>
               <Text color={"white"} fontSize={"18px"}>
-                Januari, 18 2022
+                Januari, 20 2022
               </Text>
             </HStack>
             <HStack my={1} justifyContent={"space-between"}>
@@ -67,8 +67,8 @@ const AboutScreen = () => {
           </VStack>
         </Box>
         <Box mb={5}>
-          <Button onPress={() => handleOpenLink()} mb={5}>
-            Open Free to Games Website
+          <Button bg={"#1984b9"} onPress={() => handleOpenLink()} mb={5}>
+            <Text color={"white"}>Open www.freetogame.com</Text>
           </Button>
         </Box>
       </ScrollView>

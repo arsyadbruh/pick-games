@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { TouchableOpacity } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
+  const [isRefresh, setRefresh] = useState(false); // untuk refreshing flatlist
   const [isLoading, setLoading] = useState(true); // buat spinner
   const [games, setGames] = useState([]); // nampung daftar game
 
@@ -17,8 +18,15 @@ const HomeScreen = ({ navigation }) => {
       console.error(error);
     } finally {
       setLoading(false); // matikan spinner
+      setRefresh(false); // matikan refresh flatlist
     }
   };
+
+  const refreshList = () => {
+    setRefresh(true);
+    setLoading(true);
+    fetchListGame();
+  }
 
 
   // component buat di render oleh flatlist
@@ -47,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
                 <Text bg={"#7a8288"} color={"#4e5459"} fontWeight={"bold"} p={1} borderRadius={"lg"} mr={2}>
                   {game.genre}
                 </Text>
-                <Text bg={"#7a8288"} color={"#4e5459"} fontWeight={"bold"} p={1} borderRadius={"lg"}>
+                <Text bg={ game.platform == "Web Browser" ? "#3fa75f" : "#1984b9" } color={"white"} fontWeight={"bold"} p={1} borderRadius={"lg"}>
                   {game.platform}
                 </Text>
               </HStack>
@@ -72,7 +80,7 @@ const HomeScreen = ({ navigation }) => {
           <Spinner size={"lg"} colorScheme={"primary"} />
         </Center>
       ) : (
-        <FlatList data={games} keyExtractor={(item) => item.id} renderItem={renderListGame} bg={"#2a2e33"} />
+        <FlatList data={games} keyExtractor={(item) => item.id} renderItem={renderListGame} bg={"#2a2e33"} onRefresh={refreshList} refreshing={isRefresh} />
       )}
 
     </>

@@ -71,7 +71,7 @@ const LibraryScreen = ({ navigation }) => {
     "horror",
     "mmorts",
   ];
-
+  const [isRefresh, setRefresh] = useState(false); // untuk refreshing flatlist
   const [isLoading, setLoading] = useState(true); // buat spinner
   const [games, setGames] = useState([]); // nampung daftar games
   const [sortBy, setSortBy] = useState("release-date");
@@ -89,6 +89,7 @@ const LibraryScreen = ({ navigation }) => {
     } catch (error) {
       console.error(error);
     } finally {
+      setRefresh(false);
       setLoading(false);
     }
   };
@@ -104,6 +105,7 @@ const LibraryScreen = ({ navigation }) => {
     } catch (error) {
       console.error(error);
     } finally {
+      setRefresh(false);
       setLoading(false);
     }
   };
@@ -134,7 +136,7 @@ const LibraryScreen = ({ navigation }) => {
                 <Text bg={"#7a8288"} color={"#4e5459"} fontWeight={"bold"} p={1} borderRadius={"lg"} mr={2}>
                   {game.genre}
                 </Text>
-                <Text bg={"#7a8288"} color={"#4e5459"} fontWeight={"bold"} p={1} borderRadius={"lg"}>
+                <Text bg={ game.platform == "Web Browser" ? "#3fa75f" : "#1984b9" } color={"white"} fontWeight={"bold"} p={1} borderRadius={"lg"}>
                   {game.platform}
                 </Text>
               </HStack>
@@ -177,6 +179,12 @@ const LibraryScreen = ({ navigation }) => {
     groupValues.length === 0 ? fetchListGameNoFilter(sortBy, platform) : fetchListGameFilter(sortBy, platform);
     setShowModal(false);
   };
+
+  const refreshList = () => {
+    setRefresh(true);
+    setLoading(true);
+    groupValues.length === 0 ? fetchListGameNoFilter(sortBy, platform) : fetchListGameFilter(sortBy, platform);
+  }
 
 
   // didMount atau buat running fetch saat screen di panggil
@@ -261,7 +269,8 @@ const LibraryScreen = ({ navigation }) => {
         <Button
           onPress={() => setShowModal(true)}
           size={"sm"}
-          leftIcon={<Icon as={AntDesign} name="filter" size="sm" />}>
+          bg={"#1984b9"}
+          leftIcon={<Icon as={AntDesign} name="filter" size="sm" color={"white"} />}>
           <Text color={"white"}>Category ( {groupValues.length} )</Text>
         </Button>
         <Modal isOpen={showModal} onClose={() => handleFilter()}>
@@ -321,6 +330,8 @@ const LibraryScreen = ({ navigation }) => {
           key={games.forEach((item) => {
             item.id;
           })}
+          onRefresh={refreshList}
+          refreshing={isRefresh}
         />
       )}
     </>

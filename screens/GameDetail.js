@@ -81,13 +81,13 @@ const GameDetailScreen = ({ route }) => {
             {/* Button action */}
             <Box my={3} p={3}>
               <HStack justifyContent={"space-between"} space={3} pr={3}>
-                <Button onPress={() => handleOpenLink(detailGame.freetogame_profile_url)} width={"50%"}>
+                <Button bg={"#1984b9"} onPress={() => handleOpenLink(detailGame.freetogame_profile_url)} width={"50%"}>
                   <HStack>
                     <FontAwesome5 name="external-link-alt" size={19} color="white" />
                   <Text color={"white"} fontSize={"16px"} ml={2} >Open in Browser</Text>
                   </HStack>
                 </Button>
-                <Button onPress={() => onShare(detailGame.freetogame_profile_url)} width={"50%"}>
+                <Button bg={"#1984b9"} onPress={() => onShare(detailGame.freetogame_profile_url)} width={"50%"}>
                   <HStack>
                     <Ionicons name="share-social" size={22} color="white"/>
                     <Text color={"white"} fontSize={"16px"} ml={2} >Share Games</Text>
